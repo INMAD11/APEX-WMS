@@ -18,13 +18,22 @@ namespace APEX_WMS.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var totalProducts = await _context.Products.CountAsync();
+            var totalSuppliers = await _context.Suppliers.CountAsync();
+            var totalInventory = await _context.Inventories.CountAsync();
+            var pendingOrders = await _context.Orders.CountAsync(o => o.Status == Models.OrderStatus.Pending);
+            
+            // Fetch inventories and calculate low stock items client-side
+            var inventories = await _context.Inventories.ToListAsync();
+            var lowStockItems = inventories.Count(i => i.AvailableQuantity <= 10);
+
             var viewModel = new Dictionary<string, object>
             {
-                { "TotalProducts", await _context.Products.CountAsync() },
-                { "TotalSuppliers", await _context.Suppliers.CountAsync() },
-                { "TotalInventory", await _context.Inventories.CountAsync() },
-                { "PendingOrders", await _context.Orders.CountAsync(o => o.Status == Models.OrderStatus.Pending) },
-                { "LowStockItems", await _context.Inventories.CountAsync(i => i.AvailableQuantity <= 10) }
+                { "TotalProducts", totalProducts },
+                { "TotalSuppliers", totalSuppliers },
+                { "TotalInventory", totalInventory },
+                { "PendingOrders", pendingOrders },
+                { "LowStockItems", lowStockItems }
             };
 
             return View(viewModel);
