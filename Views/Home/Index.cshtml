@@ -1,0 +1,55 @@
+@using System.Collections.Generic
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <h1 class="display-4">APEX Warehouse Management System</h1>
+    <p>Welcome to your warehouse management dashboard</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Products</h5>
+                <h2>@ViewData["TotalProducts"]</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Suppliers</h5>
+                <h2>@ViewData["TotalSuppliers"]</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Inventory</h5>
+                <h2>@ViewData["TotalInventory"]</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5 class="card-title">Pending Orders</h5>
+                <h2>@ViewData["PendingOrders"]</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Low Stock Items</h5>
+                <h2>@ViewData["LowStockItems"]</h2>
+            </div>
+        </div>
+    </div>
+</div>
